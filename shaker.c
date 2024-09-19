@@ -21,13 +21,15 @@ int main() {
     print_array(numbers, length);
 
     clock_t start_time = clock();
-    sort(numbers, length);
+    int count = sort(numbers, length);
     clock_t end_time = clock();
 
     double result_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
     printf("Sorted array: ");
     print_array(numbers, length);
+
+    printf("Count of iterations: %d\n", count);
 
     printf("The array was sorted in %f ms", result_time);
 
@@ -36,11 +38,12 @@ int main() {
     return 0;
 }
 
-void sort(int* numbers, int length) {
+int sort(int* numbers, int length) {
     unsigned char swapped = 0;
     int left = 0;
     int right = length - 1;
     
+    int counter = 0;
     while ((left < right) && (swapped == 0)) {
         swapped = 1;
 
@@ -70,7 +73,10 @@ void sort(int* numbers, int length) {
         }
 
         left++;
+        counter++;
     }
+
+    return counter;
 }
 
 void print_array(int* numbers, int length) {
